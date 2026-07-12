@@ -133,7 +133,7 @@ class Rest_API {
 			return true;
 		}
 
-		return new \WP_Error( 'ssc_nonce_expired', __( 'Your cart session expired. Please refresh and try again.', 'shakass-side-cart-pro' ), array( 'status' => 403 ) );
+		return new \WP_Error( 'ssc_nonce_expired', __( 'Votre session panier a expiré. Veuillez actualiser la page puis réessayer.', 'shakass-side-cart-pro' ), array( 'status' => 403 ) );
 	}
 
 	/** @return \WP_REST_Response */
@@ -153,7 +153,7 @@ class Rest_API {
 	}
 
 	/**
-	 * Remove item.
+	 * Retirer l’article.
 	 *
 	 * @param \WP_REST_Request $request Request.
 	 * @return \WP_REST_Response|\WP_Error
@@ -163,7 +163,7 @@ class Rest_API {
 		return is_wp_error( $result ) ? $result : rest_ensure_response( $result );
 	}
 
-	/** Apply a coupon and return the refreshed cart. */
+	/** Appliquer un code promo et retourner le panier actualisé. */
 	public function apply_coupon( $request ) {
 		$result = ( new Coupons() )->apply( $request->get_param( 'code' ) );
 		return is_wp_error( $result ) ? $result : rest_ensure_response( $this->cart->get_cart_data() );

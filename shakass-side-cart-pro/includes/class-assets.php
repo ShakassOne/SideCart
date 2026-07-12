@@ -62,15 +62,15 @@ class Assets {
 				'openAfterAdd' => (bool) $this->settings->get( 'open_after_add', true ),
 				'debounce'     => (int) $this->settings->get( 'quantity_debounce', 450 ),
 				'i18n'         => array(
-					'error'    => __( 'Unable to update the cart.', 'shakass-side-cart-pro' ),
-					'subtotal' => __( 'Subtotal', 'shakass-side-cart-pro' ),
+					'error'    => __( 'Impossible de mettre à jour le panier.', 'shakass-side-cart-pro' ),
+					'subtotal' => __( 'Sous-total', 'shakass-side-cart-pro' ),
 					'total'    => __( 'Total', 'shakass-side-cart-pro' ),
-					'decrease' => __( 'Decrease quantity', 'shakass-side-cart-pro' ),
-					'increase' => __( 'Increase quantity', 'shakass-side-cart-pro' ),
-					'remove'   => __( 'Remove item', 'shakass-side-cart-pro' ),
-					'couponPlaceholder' => __( 'Coupon code', 'shakass-side-cart-pro' ),
-					'applyCoupon' => __( 'Apply', 'shakass-side-cart-pro' ),
-					'removeCoupon' => __( 'Remove coupon', 'shakass-side-cart-pro' ),
+					'decrease' => __( 'Diminuer la quantité', 'shakass-side-cart-pro' ),
+					'increase' => __( 'Augmenter la quantité', 'shakass-side-cart-pro' ),
+					'remove'   => __( 'Retirer l’article', 'shakass-side-cart-pro' ),
+					'couponPlaceholder' => __( 'Code promo', 'shakass-side-cart-pro' ),
+					'applyCoupon' => __( 'Appliquer', 'shakass-side-cart-pro' ),
+					'removeCoupon' => __( 'Retirer le code promo', 'shakass-side-cart-pro' ),
 				),
 			)
 		);

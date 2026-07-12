@@ -20,7 +20,7 @@ final class Plugin {
 		( new Frontend\Frontend( $this->settings, $this->templates ) )->init();
 		$this->shortcodes->init();
 	}
-	public function woocommerce_notice() { echo '<div class="notice notice-error"><p>' . esc_html__( 'Shakass Side Cart Pro requires WooCommerce to be active.', 'shakass-side-cart-pro' ) . '</p></div>'; }
+	public function woocommerce_notice() { echo '<div class="notice notice-error"><p>' . esc_html__( 'Shakass Side Cart Pro nécessite que WooCommerce soit actif.', 'shakass-side-cart-pro' ) . '</p></div>'; }
 	public function settings() { return $this->settings; }
 	public function templates() { return $this->templates; }
 	public function cart_service() { return $this->cart_service; }

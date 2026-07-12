@@ -1,4 +1,4 @@
-<?php /** Template: Drawer. Version: 1.0.0-beta.1 */ defined( 'ABSPATH' ) || exit; ?>
+<?php /** Template: Drawer. Version: 1.0.0-beta.2 */ defined( 'ABSPATH' ) || exit; ?>
 <div id="ssc-root" class="ssc-root" data-ssc-root hidden>
 	<div class="ssc-overlay" data-ssc-close aria-hidden="true"></div>
 	<aside class="ssc-drawer" role="dialog" aria-modal="true" aria-labelledby="ssc-title" tabindex="-1">

@@ -61,9 +61,9 @@ class Shortcodes {
 		return wp_kses_post( $this->cart->get_total_html() );
 	}
 
-	/** Open cart button shortcode. */
+	/** Ouvrir le panier button shortcode. */
 	public function open_cart( $atts = array(), $content = '' ) {
-		$label = '' !== $content ? $content : __( 'Open cart', 'shakass-side-cart-pro' );
+		$label = '' !== $content ? $content : __( 'Ouvrir le panier', 'shakass-side-cart-pro' );
 		return '<button type="button" class="ssc-open-cart">' . esc_html( $label ) . '</button>';
 	}
 }

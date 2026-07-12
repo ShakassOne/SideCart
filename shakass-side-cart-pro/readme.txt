@@ -1,24 +1,27 @@
 === Shakass Side Cart Pro ===
 Contributors: shakass
-Tags: woocommerce, cart, ajax, side-cart
+Tags: woocommerce, panier, ajax, side-cart
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.0-beta.1
+Stable tag: 1.0.0-beta.2
 License: Proprietary
 
-WooCommerce Ajax side cart drawer by Shakass Communication.
+Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
 
-== Changelog ==
+== Journal des modifications ==
+
+= 1.0.0-beta.2 =
+* Traduction française des libellés front/admin, menu admin au premier niveau WordPress, chargement explicite du panier WooCommerce dans le service REST et envoi des cookies de session dans les requêtes Ajax.
 
 = 1.0.0-beta.1 =
-* Added generated design variables, admin design/reward toggles, Ajax coupon application/removal, reward progress data, and cross-sell recommendation data/rendering.
+* Ajout des variables de design générées, réglages admin design/récompenses, application/retrait Ajax des codes promo, données de progression récompense et rendu/données des recommandations cross-sell.
 
 = 1.0.0-alpha.3 =
-* Added Settings API registration, admin settings fields, stricter settings sanitization, safer template path normalization, expanded shortcode helper code, and uninstall data synchronization.
+* Ajout de l’enregistrement Settings API, champs de réglages admin, assainissement renforcé des réglages, normalisation plus sûre des chemins de templates, helpers shortcode étendus et synchronisation des données de désinstallation.
 
 = 1.0.0-alpha.2 =
-* Refined the Phase 1 foundation with a dedicated asset service, expanded REST argument validation, improved server-side cart validation, safer frontend DOM rendering, and clearer accessibility/live-region behavior.
+* Amélioration de la base Phase 1 avec un service d’assets dédié, validation REST étendue, validation serveur du panier renforcée, rendu DOM frontend plus sûr et comportement d’accessibilité/live-region clarifié.
 
 = 1.0.0-alpha.1 =
-* Initial Phase 1 foundation.
+* Base initiale de la Phase 1.

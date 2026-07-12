@@ -30,7 +30,7 @@ class Rewards {
 			'subtotal'       => $subtotal,
 			'remaining'      => $remaining,
 			'percent'        => round( $percent, 2 ),
-			'message'        => $remaining > 0 ? sprintf( __( 'Add %s more to unlock your reward.', 'shakass-side-cart-pro' ), wc_price( $remaining ) ) : __( 'Reward unlocked!', 'shakass-side-cart-pro' ),
+			'message'        => $remaining > 0 ? sprintf( __( 'Ajoutez encore %s pour débloquer votre récompense.', 'shakass-side-cart-pro' ), wc_price( $remaining ) ) : __( 'Récompense débloquée !', 'shakass-side-cart-pro' ),
 			'unlocked'       => 0.0 === $remaining,
 		);
 	}
