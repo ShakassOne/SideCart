@@ -10,6 +10,15 @@
 	function init() {
 		SSCDrawer.init();
 		SSCCartItems.init();
+		if (window.SSCCoupons) {
+			SSCCoupons.init();
+		}
+		if (window.SSCRewards) {
+			SSCRewards.init();
+		}
+		if (window.SSCRecommendations) {
+			SSCRecommendations.init();
+		}
 
 		window.ShakassSideCart = {
 			open: () => SSCDrawer.open(),

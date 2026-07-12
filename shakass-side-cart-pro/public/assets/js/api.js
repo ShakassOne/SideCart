@@ -40,5 +40,16 @@
 		remove(key) {
 			return this.request('cart/item?key=' + encodeURIComponent(key), { method: 'DELETE' });
 		},
+
+		coupon(code) {
+			return this.request('cart/coupon', {
+				method: 'POST',
+				body: JSON.stringify({ code }),
+			});
+		},
+
+		removeCoupon(code) {
+			return this.request('cart/coupon?code=' + encodeURIComponent(code), { method: 'DELETE' });
+		},
 	};
 })();

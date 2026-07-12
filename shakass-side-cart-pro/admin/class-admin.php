@@ -75,6 +75,15 @@ class Admin {
 					<?php $this->checkbox_row( 'floating_icon', __( 'Show floating cart icon', 'shakass-side-cart-pro' ), $values ); ?>
 					<?php $this->text_row( 'width', __( 'Desktop width', 'shakass-side-cart-pro' ), $values, '420px' ); ?>
 					<?php $this->text_row( 'tablet_width', __( 'Tablet width', 'shakass-side-cart-pro' ), $values, '70vw' ); ?>
+					<?php $this->text_row( 'drawer_background', __( 'Drawer background', 'shakass-side-cart-pro' ), $values, '#ffffff' ); ?>
+					<?php $this->text_row( 'text_color', __( 'Text color', 'shakass-side-cart-pro' ), $values, '#1f2937' ); ?>
+					<?php $this->text_row( 'accent_color', __( 'Accent color', 'shakass-side-cart-pro' ), $values, '#f97316' ); ?>
+					<?php $this->text_row( 'overlay_color', __( 'Overlay color', 'shakass-side-cart-pro' ), $values, 'rgba(15,23,42,0.48)' ); ?>
+					<?php $this->text_row( 'drawer_radius', __( 'Drawer radius', 'shakass-side-cart-pro' ), $values, '0px' ); ?>
+					<?php $this->number_row( 'free_shipping_threshold', __( 'Reward threshold', 'shakass-side-cart-pro' ), $values, 0, 1000000 ); ?>
+					<?php $this->checkbox_row( 'coupons_enabled', __( 'Enable coupons block', 'shakass-side-cart-pro' ), $values ); ?>
+					<?php $this->checkbox_row( 'rewards_enabled', __( 'Enable rewards progress', 'shakass-side-cart-pro' ), $values ); ?>
+					<?php $this->checkbox_row( 'recommendations_enabled', __( 'Enable recommendations', 'shakass-side-cart-pro' ), $values ); ?>
 					<?php $this->number_row( 'quantity_debounce', __( 'Quantity debounce (ms)', 'shakass-side-cart-pro' ), $values, 0, 3000 ); ?>
 					<?php $this->number_row( 'z_index', __( 'Z-index', 'shakass-side-cart-pro' ), $values, 1, 2147483647 ); ?>
 					<?php $this->checkbox_row( 'delete_on_uninstall', __( 'Delete plugin data on uninstall', 'shakass-side-cart-pro' ), $values ); ?>

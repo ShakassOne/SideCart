@@ -21,7 +21,7 @@
 .ssc-overlay {
 	position: absolute;
 	inset: 0;
-	background: rgba(15, 23, 42, 0.48);
+	background: var(--ssc-overlay);
 	opacity: 0;
 	transition: opacity 220ms ease;
 	pointer-events: auto;
@@ -35,6 +35,7 @@
 	width: min(var(--ssc-width), 100vw);
 	height: 100%;
 	background: var(--ssc-bg);
+	border-radius: var(--ssc-radius) 0 0 var(--ssc-radius);
 	box-shadow: var(--ssc-shadow);
 	display: flex;
 	flex-direction: column;
@@ -231,4 +232,97 @@
 	.ssc-drawer {
 		transition: none;
 	}
+}
+
+.ssc-coupons,
+.ssc-progress,
+.ssc-recommendations {
+	padding: 12px 16px;
+	border-bottom: 1px solid var(--ssc-border);
+}
+
+.ssc-coupon-form {
+	display: flex;
+	gap: 8px;
+}
+
+.ssc-coupon-form input {
+	min-width: 0;
+	flex: 1;
+	border: 1px solid var(--ssc-border);
+	border-radius: 8px;
+	padding: 10px 12px;
+}
+
+.ssc-coupon-form button,
+.ssc-coupon-pill button {
+	border: 0;
+	border-radius: 8px;
+	background: var(--ssc-accent);
+	color: #fff;
+	padding: 10px 12px;
+	cursor: pointer;
+}
+
+.ssc-coupon-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 10px;
+}
+
+.ssc-coupon-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 8px;
+	border-radius: 999px;
+	background: #f3f4f6;
+}
+
+.ssc-progress__message {
+	margin: 0 0 8px;
+	font-size: 13px;
+}
+
+.ssc-progress__track {
+	height: 9px;
+	border-radius: 999px;
+	background: #e5e7eb;
+	overflow: hidden;
+}
+
+.ssc-progress__fill {
+	display: block;
+	height: 100%;
+	width: 0;
+	border-radius: inherit;
+	background: var(--ssc-accent);
+	transition: width 220ms ease;
+}
+
+.ssc-recommendations h3 {
+	margin: 0 0 10px;
+	font-size: 15px;
+}
+
+.ssc-recommendation-list {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.ssc-recommendation-card {
+	display: grid;
+	gap: 6px;
+	color: inherit;
+	text-decoration: none;
+	font-size: 13px;
+}
+
+.ssc-recommendation-card img {
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+	border-radius: 10px;
 }

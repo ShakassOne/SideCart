@@ -83,14 +83,40 @@ class Cart_Service {
 			);
 		}
 
+		$settings = new Settings();
 		return array(
 			'items'         => $items,
+			'coupons'       => $this->get_coupons(),
+			'rewards'       => ( new Rewards() )->progress( $settings ),
+			'recommendations' => ( new Recommendations() )->get_items(),
 			'count'         => $this->get_count(),
 			'total_html'    => wp_kses_post( $cart->get_total() ),
 			'subtotal_html' => wp_kses_post( $cart->get_cart_subtotal() ),
 			'cart_url'      => esc_url_raw( wc_get_cart_url() ),
 			'checkout_url'  => esc_url_raw( apply_filters( 'ssc_checkout_url', wc_get_checkout_url() ) ),
 		);
+	}
+
+	/**
+	 * Get applied coupons.
+	 *
+	 * @return array<int,array<string,string>>
+	 */
+	private function get_coupons() {
+		$cart = $this->cart();
+		if ( ! $cart ) {
+			return array();
+		}
+
+		$coupons = array();
+		foreach ( $cart->get_coupons() as $code => $coupon ) {
+			$coupons[] = array(
+				'code' => wc_format_coupon_code( $code ),
+				'label' => sprintf( __( 'Coupon: %s', 'shakass-side-cart-pro' ), wc_format_coupon_code( $code ) ),
+			);
+		}
+
+		return $coupons;
 	}
 
 	/**

@@ -32,13 +32,20 @@ class Assets {
 		}
 
 		wp_enqueue_style( 'ssc-frontend', SSC_PLUGIN_URL . 'public/assets/css/frontend.css', array(), SSC_VERSION );
+		$dynamic_css = ( new Style_Generator() )->generate( $this->settings );
+		if ( '' !== $dynamic_css ) {
+			wp_add_inline_style( 'ssc-frontend', $dynamic_css );
+		}
 
 		$modules = array(
 			'ssc-api'        => array(),
 			'ssc-state'      => array( 'ssc-api' ),
 			'ssc-drawer'     => array( 'ssc-state' ),
 			'ssc-cart-items' => array( 'ssc-drawer' ),
-			'ssc-app'        => array( 'ssc-cart-items' ),
+			'ssc-coupons'    => array( 'ssc-cart-items' ),
+			'ssc-rewards'    => array( 'ssc-cart-items' ),
+			'ssc-recommendations' => array( 'ssc-cart-items' ),
+			'ssc-app'        => array( 'ssc-coupons', 'ssc-rewards', 'ssc-recommendations' ),
 		);
 
 		foreach ( $modules as $handle => $dependencies ) {
@@ -61,6 +68,9 @@ class Assets {
 					'decrease' => __( 'Decrease quantity', 'shakass-side-cart-pro' ),
 					'increase' => __( 'Increase quantity', 'shakass-side-cart-pro' ),
 					'remove'   => __( 'Remove item', 'shakass-side-cart-pro' ),
+					'couponPlaceholder' => __( 'Coupon code', 'shakass-side-cart-pro' ),
+					'applyCoupon' => __( 'Apply', 'shakass-side-cart-pro' ),
+					'removeCoupon' => __( 'Remove coupon', 'shakass-side-cart-pro' ),
 				),
 			)
 		);

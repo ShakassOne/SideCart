@@ -1,2 +1,2 @@
-<?php /** Template: express-payments. Version: 1.0.0-alpha.3 */ defined( 'ABSPATH' ) || exit; ?>
+<?php /** Template: express-payments. Version: 1.0.0-beta.1 */ defined( 'ABSPATH' ) || exit; ?>
 <section class="ssc-section ssc-express-payments" data-ssc-section="express-payments"></section>

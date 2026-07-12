@@ -56,6 +56,26 @@ class Rest_API {
 				),
 			)
 		);
+
+
+		register_rest_route(
+			'ssc/v1',
+			'/cart/coupon',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'apply_coupon' ),
+					'permission_callback' => array( $this, 'check_nonce' ),
+					'args'                => $this->coupon_args(),
+				),
+				array(
+					'methods'             => \WP_REST_Server::DELETABLE,
+					'callback'            => array( $this, 'remove_coupon' ),
+					'permission_callback' => array( $this, 'check_nonce' ),
+					'args'                => $this->coupon_args(),
+				),
+			)
+		);
 	}
 
 	/**
@@ -85,6 +105,21 @@ class Rest_API {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Coupon endpoint argument schema.
+	 *
+	 * @return array<string,array<string,mixed>>
+	 */
+	private function coupon_args() {
+		return array(
+			'code' => array(
+				'required'          => true,
+				'type'              => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
+			),
+		);
 	}
 
 	/**
@@ -126,5 +161,17 @@ class Rest_API {
 	public function delete_item( $request ) {
 		$result = $this->cart->remove_item( $request->get_param( 'key' ) );
 		return is_wp_error( $result ) ? $result : rest_ensure_response( $result );
+	}
+
+	/** Apply a coupon and return the refreshed cart. */
+	public function apply_coupon( $request ) {
+		$result = ( new Coupons() )->apply( $request->get_param( 'code' ) );
+		return is_wp_error( $result ) ? $result : rest_ensure_response( $this->cart->get_cart_data() );
+	}
+
+	/** Remove a coupon and return the refreshed cart. */
+	public function remove_coupon( $request ) {
+		$result = ( new Coupons() )->remove( $request->get_param( 'code' ) );
+		return is_wp_error( $result ) ? $result : rest_ensure_response( $this->cart->get_cart_data() );
 	}
 }
