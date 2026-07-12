@@ -1,11 +1,15 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.2`
+Version: `1.0.0-beta.3`
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
 
-## Inclus dans 1.0.0-beta.2
+## Inclus dans 1.0.0-beta.3
 
+- Correction de la sauvegarde des cases décochées dans l’administration.
+- Ajout du shortcode `[ssc_menu_cart]` utilisable dans les libellés de menus WordPress et dans les contenus.
+- Séparation visuelle du compteur d’articles et du total sur l’icône flottante.
+- Fiabilisation des changements de quantité Ajax depuis le drawer.
 - Interface publique et interface d’administration traduites en français.
 - Menu d’administration déplacé au premier niveau de WordPress, en dehors du sous-menu WooCommerce.
 - Chargement explicite du panier WooCommerce côté REST pour garder le drawer synchronisé avec la session panier.
@@ -22,6 +26,10 @@ Module original de panier latéral Ajax pour WooCommerce, développé pour Shaka
 - Bases pour les codes promo, la progression de récompense et les recommandations cross-sell.
 
 ## Journal des modifications
+
+### 1.0.0-beta.3
+
+- Correction de la sauvegarde des cases décochées, ajout du shortcode menu `[ssc_menu_cart]`, séparation visuelle du compteur et du total du bouton flottant, et fiabilisation des changements de quantité Ajax depuis le drawer.
 
 ### 1.0.0-beta.2
 

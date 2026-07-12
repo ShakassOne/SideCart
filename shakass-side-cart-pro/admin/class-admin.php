@@ -100,7 +100,7 @@ class Admin {
 		?>
 		<tr>
 			<th scope="row"><?php echo esc_html( $label ); ?></th>
-			<td><label><input type="checkbox" name="ssc_settings[<?php echo esc_attr( $key ); ?>]" value="1" <?php checked( ! empty( $values[ $key ] ) ); ?>> <?php esc_html_e( 'Activé', 'shakass-side-cart-pro' ); ?></label></td>
+			<td><label><input type="hidden" name="ssc_settings[<?php echo esc_attr( $key ); ?>]" value="0"><input type="checkbox" name="ssc_settings[<?php echo esc_attr( $key ); ?>]" value="1" <?php checked( ! empty( $values[ $key ] ) ); ?>> <?php esc_html_e( 'Activé', 'shakass-side-cart-pro' ); ?></label></td>
 		</tr>
 		<?php
 	}
