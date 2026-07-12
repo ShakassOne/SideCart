@@ -1,2 +1,2 @@
-<?php /** Template: Header. Version: 1.0.0-beta.2 */ defined( 'ABSPATH' ) || exit; ?>
-<header class="ssc-header"><h2 id="ssc-title"><?php esc_html_e( 'Votre panier', 'shakass-side-cart-pro' ); ?></h2><button type="button" class="ssc-close" data-ssc-close aria-label="<?php esc_attr_e( 'Fermer le panier', 'shakass-side-cart-pro' ); ?>">×</button></header>
+<?php /** Template: Header. Version: 1.0.0-beta.5 */ defined( 'ABSPATH' ) || exit; ?>
+<header class="ssc-header"><h2 id="ssc-title"><?php esc_html_e( 'Votre panier', 'shakass-side-cart-pro' ); ?></h2><span class="ssc-header__count" data-ssc-count><?php echo esc_html( function_exists( 'ssc_get_cart_count' ) ? (string) ssc_get_cart_count() : '0' ); ?></span><button type="button" class="ssc-close" data-ssc-close aria-label="<?php esc_attr_e( 'Fermer le panier', 'shakass-side-cart-pro' ); ?>">×</button></header>
