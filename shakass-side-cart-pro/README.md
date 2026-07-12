@@ -1,10 +1,10 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-alpha.2`
+Version: `1.0.0-alpha.3`
 
 Phase 1 foundation for an original WooCommerce Ajax side cart plugin.
 
-## Included in 1.0.0-alpha.2
+## Included in 1.0.0-alpha.3
 
 - Plugin bootstrap with namespaced autoloader.
 - WooCommerce dependency notice and HPOS compatibility declaration.
@@ -13,8 +13,13 @@ Phase 1 foundation for an original WooCommerce Ajax side cart plugin.
 - REST endpoints for cart read, quantity update and item removal using WordPress REST nonces.
 - Overrideable templates in `/templates/` with theme overrides from `shakass-side-cart/`.
 - More maintainable Phase 1 services and JavaScript modules with safer DOM rendering and localized labels.
+- Sanitized versioned settings schema and a minimal WooCommerce admin settings page.
 
 ## Changelog
+
+### 1.0.0-alpha.3
+
+- Added Settings API registration, admin settings fields, stricter settings sanitization, safer template path normalization, expanded shortcode helper code, and uninstall data synchronization.
 
 ### 1.0.0-alpha.2
 
