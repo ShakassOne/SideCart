@@ -13,7 +13,15 @@ class Cart_Service {
 	 * @return \WC_Cart|null
 	 */
 	private function cart() {
-		return function_exists( 'WC' ) && WC()->cart ? WC()->cart : null;
+		if ( ! function_exists( 'WC' ) ) {
+			return null;
+		}
+
+		if ( null === WC()->cart && function_exists( 'wc_load_cart' ) ) {
+			wc_load_cart();
+		}
+
+		return WC()->cart ? WC()->cart : null;
 	}
 
 	/**
@@ -112,7 +120,7 @@ class Cart_Service {
 		foreach ( $cart->get_coupons() as $code => $coupon ) {
 			$coupons[] = array(
 				'code' => wc_format_coupon_code( $code ),
-				'label' => sprintf( __( 'Coupon: %s', 'shakass-side-cart-pro' ), wc_format_coupon_code( $code ) ),
+				'label' => sprintf( __( 'Code promo : %s', 'shakass-side-cart-pro' ), wc_format_coupon_code( $code ) ),
 			);
 		}
 
@@ -130,24 +138,24 @@ class Cart_Service {
 		$cart = $this->cart();
 
 		if ( ! $cart || ! is_string( $key ) || '' === $key ) {
-			return new \WP_Error( 'ssc_cart_unavailable', __( 'Cart is unavailable.', 'shakass-side-cart-pro' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'ssc_cart_unavailable', __( 'Le panier est indisponible.', 'shakass-side-cart-pro' ), array( 'status' => 400 ) );
 		}
 
 		$quantity = wc_stock_amount( $quantity );
 		if ( $quantity < 0 ) {
-			return new \WP_Error( 'ssc_invalid_quantity', __( 'Invalid quantity.', 'shakass-side-cart-pro' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'ssc_invalid_quantity', __( 'Quantité invalide.', 'shakass-side-cart-pro' ), array( 'status' => 400 ) );
 		}
 
 		$item = $cart->get_cart_item( $key );
 		if ( ! $item ) {
-			return new \WP_Error( 'ssc_missing_item', __( 'Cart item not found.', 'shakass-side-cart-pro' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'ssc_missing_item', __( 'Article introuvable dans le panier.', 'shakass-side-cart-pro' ), array( 'status' => 404 ) );
 		}
 
 		$product = isset( $item['data'] ) ? $item['data'] : null;
 		if ( $product && $quantity > 0 ) {
 			$max = (int) $product->get_max_purchase_quantity();
 			if ( $max > 0 && $quantity > $max ) {
-				return new \WP_Error( 'ssc_quantity_too_high', __( 'Requested quantity is not available.', 'shakass-side-cart-pro' ), array( 'status' => 400 ) );
+				return new \WP_Error( 'ssc_quantity_too_high', __( 'La quantité demandée n’est pas disponible.', 'shakass-side-cart-pro' ), array( 'status' => 400 ) );
 			}
 		}
 

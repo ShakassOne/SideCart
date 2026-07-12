@@ -16,7 +16,7 @@
 				options.headers || {}
 			);
 
-			return fetch(sscConfig.restUrl + path, Object.assign({}, options, { signal: this.controller.signal, headers }))
+			return fetch(sscConfig.restUrl + path, Object.assign({}, options, { signal: this.controller.signal, headers, credentials: 'same-origin', cache: 'no-store' }))
 				.then(async (response) => {
 					const data = await response.json().catch(() => ({ message: sscConfig.i18n.error }));
 					if (!response.ok) {
