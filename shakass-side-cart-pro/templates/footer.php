@@ -1,0 +1,2 @@
+<?php /** Template: Footer. Version: 1.0.0-alpha.2 */ defined( 'ABSPATH' ) || exit; ?>
+<footer class="ssc-footer"><?php do_action( 'ssc_before_checkout_buttons' ); ?><a class="ssc-button ssc-cart-link" data-ssc-cart-link href="#"><?php esc_html_e( 'View cart', 'shakass-side-cart-pro' ); ?></a><a class="ssc-button ssc-checkout-link" data-ssc-checkout-link href="#"><?php esc_html_e( 'Checkout', 'shakass-side-cart-pro' ); ?></a><?php do_action( 'ssc_after_checkout_buttons' ); ?></footer>

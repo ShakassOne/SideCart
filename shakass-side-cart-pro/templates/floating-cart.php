@@ -1,0 +1,2 @@
+<?php /** Template: Floating cart. Version: 1.0.0-alpha.2 */ defined( 'ABSPATH' ) || exit; ?>
+<button type="button" class="ssc-floating-cart <?php echo ! empty( $inline ) ? 'ssc-floating-cart--inline' : ''; ?>" data-ssc-open aria-label="<?php esc_attr_e( 'Open cart', 'shakass-side-cart-pro' ); ?>"><span aria-hidden="true">🛒</span><span class="ssc-floating-cart__count" data-ssc-count><?php echo esc_html( (string) $count ); ?></span><span class="ssc-floating-cart__total" data-ssc-total><?php echo wp_kses_post( $total ); ?></span></button>
