@@ -1,0 +1,1 @@
+window.SSCState={cart:null,listeners:[],set(cart){this.cart=cart;this.listeners.forEach(fn=>fn(cart));document.dispatchEvent(new CustomEvent('ssc:cart-updated',{detail:cart}));},on(fn){this.listeners.push(fn);}};
