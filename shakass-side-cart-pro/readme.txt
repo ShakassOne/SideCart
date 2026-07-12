@@ -1,0 +1,15 @@
+=== Shakass Side Cart Pro ===
+Contributors: shakass
+Tags: woocommerce, cart, ajax, side-cart
+Requires at least: 6.4
+Tested up to: 6.8
+Requires PHP: 7.4
+Stable tag: 1.0.0-alpha.1
+License: Proprietary
+
+WooCommerce Ajax side cart drawer by Shakass Communication.
+
+== Changelog ==
+
+= 1.0.0-alpha.1 =
+* Initial Phase 1 foundation.
