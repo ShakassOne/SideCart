@@ -78,8 +78,8 @@ class Cart_Service {
 				array(
 					'key'               => $key,
 					'name'              => wp_strip_all_tags( $product->get_name() ),
-					'permalink'         => $product->is_visible() ? esc_url_raw( $product->get_permalink( $item ) ) : '',
-					'image'             => wp_kses_post( $product->get_image( 'woocommerce_thumbnail', array( 'loading' => 'lazy' ) ) ),
+					'permalink'         => $this->get_item_permalink( $product, $item ),
+					'image'             => $this->get_item_image_html( $product, $item, $key ),
 					'quantity'          => (int) $item['quantity'],
 					'price'             => wp_kses_post( wc_price( wc_get_price_to_display( $product ) ) ),
 					'line_total'        => wp_kses_post( wc_price( $item['line_total'] + $item['line_tax'] ) ),
@@ -103,6 +103,55 @@ class Cart_Service {
 			'cart_url'      => esc_url_raw( wc_get_cart_url() ),
 			'checkout_url'  => esc_url_raw( apply_filters( 'ssc_checkout_url', wc_get_checkout_url() ) ),
 		);
+	}
+
+	/**
+	 * Get the best cart item link, using a personalization edit URL when available.
+	 *
+	 * @param \WC_Product $product Product instance.
+	 * @param array       $item    WooCommerce cart item.
+	 * @return string
+	 */
+	private function get_item_permalink( $product, $item ) {
+		if ( function_exists( 'tsl2_cart_item_edit_url' ) ) {
+			$edit_url = tsl2_cart_item_edit_url( $item );
+			if ( $edit_url ) {
+				return esc_url_raw( $edit_url );
+			}
+		}
+
+		return $product->is_visible() ? esc_url_raw( $product->get_permalink( $item ) ) : '';
+	}
+
+	/**
+	 * Get cart item thumbnail HTML, preferring T-Shirt Studio mockups when present.
+	 *
+	 * The T-Shirt Studio plugin exposes public helpers for custom mockups and also
+	 * injects its image through WooCommerce's standard cart thumbnail filter. This
+	 * method supports both paths while keeping the normal product image fallback.
+	 *
+	 * @param \WC_Product $product Product instance.
+	 * @param array       $item    WooCommerce cart item.
+	 * @param string      $key     Cart item key.
+	 * @return string
+	 */
+	private function get_item_image_html( $product, $item, $key ) {
+		$image = $product->get_image( 'woocommerce_thumbnail', array( 'loading' => 'lazy' ) );
+
+		if ( function_exists( 'tsl2_cart_item_mockup' ) ) {
+			$mockup = tsl2_cart_item_mockup( $item );
+			if ( $mockup ) {
+				return wp_kses_post(
+					sprintf(
+						'<img src="%1$s" alt="%2$s" loading="lazy" />',
+						esc_url( $mockup ),
+						esc_attr( $product->get_name() )
+					)
+				);
+			}
+		}
+
+		return wp_kses_post( apply_filters( 'woocommerce_cart_item_thumbnail', $image, $item, $key ) );
 	}
 
 	/**
