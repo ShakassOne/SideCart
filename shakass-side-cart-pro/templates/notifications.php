@@ -1,2 +1,12 @@
-<?php /** Template: notifications. Version: 1.0.0-alpha.1 */ defined( 'ABSPATH' ) || exit; ?>
-<section class="ssc-section ssc-notifications" data-ssc-section="notifications"></section>
+<?php
+/**
+ * Template: Notifications.
+ *
+ * Version: 1.0.0-alpha.3
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
+<section class="ssc-notifications" data-ssc-section="notifications">
+	<div class="ssc-live" data-ssc-live aria-live="polite" aria-atomic="true"></div>
+</section>

@@ -1,2 +1,2 @@
-<?php /** Template: recommendations. Version: 1.0.0-alpha.1 */ defined( 'ABSPATH' ) || exit; ?>
+<?php /** Template: recommendations. Version: 1.0.0-alpha.3 */ defined( 'ABSPATH' ) || exit; ?>
 <section class="ssc-section ssc-recommendations" data-ssc-section="recommendations"></section>

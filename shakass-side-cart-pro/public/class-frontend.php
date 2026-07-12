@@ -1,5 +1,64 @@
 <?php
 namespace Shakass\SideCartPro\Frontend;
-use Shakass\SideCartPro\Settings; use Shakass\SideCartPro\Template_Loader;
+
+use Shakass\SideCartPro\Assets;
+use Shakass\SideCartPro\Settings;
+use Shakass\SideCartPro\Template_Loader;
+
 defined( 'ABSPATH' ) || exit;
-class Frontend { private $settings; private $templates; public function __construct( Settings $settings, Template_Loader $templates ){ $this->settings=$settings; $this->templates=$templates; } public function init(){ if ( ! $this->settings->get('enabled',true) ) { return; } add_action('wp_enqueue_scripts',array($this,'assets')); add_action('wp_footer',array($this,'render')); } public function assets(){ wp_enqueue_style('ssc-frontend',SSC_PLUGIN_URL.'public/assets/css/frontend.css',array(),SSC_VERSION); wp_enqueue_script('ssc-api',SSC_PLUGIN_URL.'public/assets/js/api.js',array(),SSC_VERSION,true); wp_enqueue_script('ssc-state',SSC_PLUGIN_URL.'public/assets/js/state.js',array('ssc-api'),SSC_VERSION,true); wp_enqueue_script('ssc-drawer',SSC_PLUGIN_URL.'public/assets/js/drawer.js',array('ssc-state'),SSC_VERSION,true); wp_enqueue_script('ssc-cart-items',SSC_PLUGIN_URL.'public/assets/js/cart-items.js',array('ssc-drawer'),SSC_VERSION,true); wp_enqueue_script('ssc-app',SSC_PLUGIN_URL.'public/assets/js/app.js',array('ssc-cart-items'),SSC_VERSION,true); wp_localize_script('ssc-api','sscConfig',array('restUrl'=>esc_url_raw(rest_url('ssc/v1/')),'nonce'=>wp_create_nonce('wp_rest'),'openAfterAdd'=>(bool)$this->settings->get('open_after_add',true),'debounce'=>(int)$this->settings->get('quantity_debounce',450),'i18n'=>array('error'=>__('Unable to update the cart.','shakass-side-cart-pro')))); } public function render(){ do_action('ssc_before_drawer'); $this->templates->render('drawer.php',array('settings'=>$this->settings->all())); if ( $this->settings->get('floating_icon',true) ) { $this->templates->render('floating-cart.php',array('count'=>function_exists('ssc_get_cart_count')?ssc_get_cart_count():0,'total'=>function_exists('ssc_get_cart_total')?ssc_get_cart_total():'','inline'=>false)); } do_action('ssc_after_drawer'); } }
+
+/**
+ * Frontend integration for rendering and assets.
+ */
+class Frontend {
+	/** @var Settings */
+	private $settings;
+
+	/** @var Template_Loader */
+	private $templates;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param Settings        $settings  Settings service.
+	 * @param Template_Loader $templates Template loader.
+	 */
+	public function __construct( Settings $settings, Template_Loader $templates ) {
+		$this->settings  = $settings;
+		$this->templates = $templates;
+	}
+
+	/**
+	 * Register frontend hooks.
+	 */
+	public function init() {
+		if ( ! $this->settings->get( 'enabled', true ) ) {
+			return;
+		}
+
+		$assets = new Assets( $this->settings );
+		add_action( 'wp_enqueue_scripts', array( $assets, 'enqueue_frontend' ) );
+		add_action( 'wp_footer', array( $this, 'render' ) );
+	}
+
+	/**
+	 * Render side cart shell and floating icon.
+	 */
+	public function render() {
+		do_action( 'ssc_before_drawer' );
+		$this->templates->render( 'drawer.php', array( 'settings' => $this->settings->all() ) );
+
+		if ( $this->settings->get( 'floating_icon', true ) ) {
+			$this->templates->render(
+				'floating-cart.php',
+				array(
+					'count'  => function_exists( 'ssc_get_cart_count' ) ? ssc_get_cart_count() : 0,
+					'total'  => function_exists( 'ssc_get_cart_total' ) ? ssc_get_cart_total() : '',
+					'inline' => false,
+				)
+			);
+		}
+
+		do_action( 'ssc_after_drawer' );
+	}
+}
