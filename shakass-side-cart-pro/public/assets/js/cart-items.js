@@ -15,7 +15,7 @@
 	}
 
 	window.SSCCartItems = {
-		timer: null,
+		timers: {},
 
 		init() {
 			SSCState.on((cart) => this.render(cart));
@@ -57,18 +57,23 @@
 		},
 
 		queue(key, quantity) {
-			clearTimeout(this.timer);
-			this.timer = setTimeout(() => this.update(key, quantity), sscConfig.debounce || 450);
+			clearTimeout(this.timers[key]);
+			this.timers[key] = setTimeout(() => {
+				delete this.timers[key];
+				this.update(key, quantity);
+			}, sscConfig.debounce || 450);
 		},
 
-		setBusy(isBusy) {
-			document.querySelectorAll('[data-ssc-item] button, [data-ssc-item] input').forEach((control) => {
+		setBusy(key, isBusy) {
+			const escapeSelector = window.CSS && CSS.escape ? CSS.escape : (value) => String(value).replace(/["\\]/g, '\\$&');
+			const selector = key ? `[data-ssc-item][data-key="${escapeSelector(key)}"] button, [data-ssc-item][data-key="${escapeSelector(key)}"] input` : '[data-ssc-item] button, [data-ssc-item] input';
+			document.querySelectorAll(selector).forEach((control) => {
 				control.disabled = isBusy;
 			});
 		},
 
 		update(key, quantity) {
-			this.setBusy(true);
+			this.setBusy(key, true);
 			document.dispatchEvent(new CustomEvent('ssc:cart-updating'));
 			SSCApi.quantity(key, quantity)
 				.then((cart) => {
@@ -76,11 +81,11 @@
 					document.dispatchEvent(new CustomEvent('ssc:quantity-changed', { detail: { key, quantity } }));
 				})
 				.catch((error) => document.dispatchEvent(new CustomEvent('ssc:error', { detail: error })))
-				.finally(() => this.setBusy(false));
+				.finally(() => this.setBusy(key, false));
 		},
 
 		remove(key) {
-			this.setBusy(true);
+			this.setBusy(key, true);
 			document.dispatchEvent(new CustomEvent('ssc:cart-updating'));
 			SSCApi.remove(key)
 				.then((cart) => {
@@ -88,7 +93,7 @@
 					document.dispatchEvent(new CustomEvent('ssc:item-removed', { detail: { key } }));
 				})
 				.catch((error) => document.dispatchEvent(new CustomEvent('ssc:error', { detail: error })))
-				.finally(() => this.setBusy(false));
+				.finally(() => this.setBusy(key, false));
 		},
 
 		render(cart) {

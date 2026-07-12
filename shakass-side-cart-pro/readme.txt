@@ -4,12 +4,15 @@ Tags: woocommerce, panier, ajax, side-cart
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.0-beta.2
+Stable tag: 1.0.0-beta.3
 License: Proprietary
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
 
 == Journal des modifications ==
+
+= 1.0.0-beta.3 =
+* Correction de la sauvegarde des cases décochées, ajout du shortcode menu `[ssc_menu_cart]`, séparation visuelle du compteur et du total du bouton flottant, et fiabilisation des changements de quantité Ajax depuis le drawer.
 
 = 1.0.0-beta.2 =
 * Traduction française des libellés front/admin, menu admin au premier niveau WordPress, chargement explicite du panier WooCommerce dans le service REST et envoi des cookies de session dans les requêtes Ajax.

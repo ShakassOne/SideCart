@@ -22,10 +22,12 @@ class Shortcodes {
 	/** Register shortcodes. */
 	public function init() {
 		add_shortcode( 'ssc_cart_icon', array( $this, 'cart_icon' ) );
+		add_shortcode( 'ssc_menu_cart', array( $this, 'menu_cart' ) );
 		add_shortcode( 'ssc_cart_count', array( $this, 'cart_count' ) );
 		add_shortcode( 'ssc_cart_total', array( $this, 'cart_total' ) );
 		add_shortcode( 'ssc_open_cart', array( $this, 'open_cart' ) );
 		add_shortcode( 'ssc_cart', array( $this, 'cart_icon' ) );
+		add_filter( 'nav_menu_item_title', 'do_shortcode' );
 	}
 
 	/** Render cart icon shortcode. */
@@ -59,6 +61,24 @@ class Shortcodes {
 	/** Cart total shortcode. */
 	public function cart_total() {
 		return wp_kses_post( $this->cart->get_total_html() );
+	}
+
+	/** Menu-friendly cart trigger shortcode. */
+	public function menu_cart( $atts = array() ) {
+		$atts = shortcode_atts(
+			array(
+				'label' => __( 'Panier', 'shakass-side-cart-pro' ),
+			),
+			$atts,
+			'ssc_menu_cart'
+		);
+
+		return sprintf(
+			'<button type="button" class="ssc-menu-cart ssc-open-cart"><span class="ssc-menu-cart__label">%1$s</span> <span class="ssc-menu-cart__count" data-ssc-count>%2$s</span> <span class="ssc-menu-cart__total" data-ssc-total>%3$s</span></button>',
+			esc_html( $atts['label'] ),
+			esc_html( (string) $this->cart->get_count() ),
+			wp_kses_post( $this->cart->get_total_html() )
+		);
 	}
 
 	/** Ouvrir le panier button shortcode. */

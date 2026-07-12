@@ -1,13 +1,7 @@
 (function () {
 	window.SSCApi = {
-		controller: null,
-
 		request(path, options = {}) {
-			if (this.controller) {
-				this.controller.abort();
-			}
-
-			this.controller = new AbortController();
+			const controller = new AbortController();
 			const headers = Object.assign(
 				{
 					'Content-Type': 'application/json',
@@ -16,7 +10,7 @@
 				options.headers || {}
 			);
 
-			return fetch(sscConfig.restUrl + path, Object.assign({}, options, { signal: this.controller.signal, headers, credentials: 'same-origin', cache: 'no-store' }))
+			return fetch(sscConfig.restUrl + path, Object.assign({}, options, { signal: controller.signal, headers, credentials: 'same-origin', cache: 'no-store' }))
 				.then(async (response) => {
 					const data = await response.json().catch(() => ({ message: sscConfig.i18n.error }));
 					if (!response.ok) {

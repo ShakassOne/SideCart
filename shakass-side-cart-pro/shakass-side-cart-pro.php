@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Shakass Side Cart Pro
  * Description: Panier latéral Ajax WooCommerce par Shakass Communication.
- * Version: 1.0.0-beta.2
+ * Version: 1.0.0-beta.3
  * Author: Shakass Communication
  * Text Domain: shakass-side-cart-pro
  * Domain Path: /languages
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SSC_VERSION', '1.0.0-beta.2' );
+define( 'SSC_VERSION', '1.0.0-beta.3' );
 define( 'SSC_PLUGIN_FILE', __FILE__ );
 define( 'SSC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SSC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
