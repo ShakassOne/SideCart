@@ -74,13 +74,13 @@ class Admin {
 					<?php $this->checkbox_row( 'enabled', __( 'Activer le panier latéral', 'shakass-side-cart-pro' ), $values ); ?>
 					<?php $this->checkbox_row( 'open_after_add', __( 'Ouvrir après l’ajout au panier', 'shakass-side-cart-pro' ), $values ); ?>
 					<?php $this->checkbox_row( 'floating_icon', __( 'Afficher l’icône flottante du panier', 'shakass-side-cart-pro' ), $values ); ?>
-					<?php $this->text_row( 'width', __( 'Largeur ordinateur', 'shakass-side-cart-pro' ), $values, '420px' ); ?>
+					<?php $this->text_row( 'width', __( 'Largeur ordinateur', 'shakass-side-cart-pro' ), $values, '455px' ); ?>
 					<?php $this->text_row( 'tablet_width', __( 'Largeur tablette', 'shakass-side-cart-pro' ), $values, '70vw' ); ?>
-					<?php $this->text_row( 'drawer_background', __( 'Arrière-plan du tiroir', 'shakass-side-cart-pro' ), $values, '#ffffff' ); ?>
-					<?php $this->text_row( 'text_color', __( 'Couleur du texte', 'shakass-side-cart-pro' ), $values, '#1f2937' ); ?>
-					<?php $this->text_row( 'accent_color', __( 'Couleur d’accent', 'shakass-side-cart-pro' ), $values, '#f97316' ); ?>
-					<?php $this->text_row( 'overlay_color', __( 'Couleur du voile', 'shakass-side-cart-pro' ), $values, 'rgba(15,23,42,0.48)' ); ?>
-					<?php $this->text_row( 'drawer_radius', __( 'Arrondi du tiroir', 'shakass-side-cart-pro' ), $values, '0px' ); ?>
+					<?php $this->text_row( 'drawer_background', __( 'Arrière-plan du tiroir', 'shakass-side-cart-pro' ), $values, '#090c12' ); ?>
+					<?php $this->text_row( 'text_color', __( 'Couleur du texte', 'shakass-side-cart-pro' ), $values, '#f7f7f7' ); ?>
+					<?php $this->text_row( 'accent_color', __( 'Couleur d’accent', 'shakass-side-cart-pro' ), $values, '#ff6a00' ); ?>
+					<?php $this->text_row( 'overlay_color', __( 'Couleur du voile', 'shakass-side-cart-pro' ), $values, 'rgba(0,0,0,.70)' ); ?>
+					<?php $this->text_row( 'drawer_radius', __( 'Arrondi du tiroir', 'shakass-side-cart-pro' ), $values, '12px' ); ?>
 					<?php $this->number_row( 'free_shipping_threshold', __( 'Seuil de récompense', 'shakass-side-cart-pro' ), $values, 0, 1000000 ); ?>
 					<?php $this->checkbox_row( 'coupons_enabled', __( 'Activer le bloc codes promo', 'shakass-side-cart-pro' ), $values ); ?>
 					<?php $this->checkbox_row( 'rewards_enabled', __( 'Activer la progression des récompenses', 'shakass-side-cart-pro' ), $values ); ?>

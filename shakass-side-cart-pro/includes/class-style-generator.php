@@ -19,13 +19,13 @@ class Style_Generator {
 		}
 
 		$vars = array(
-			'--ssc-width'         => $settings->get( 'width', '420px' ),
+			'--ssc-width'         => $settings->get( 'width', '455px' ),
 			'--ssc-tablet-width'  => $settings->get( 'tablet_width', '70vw' ),
-			'--ssc-bg'            => $settings->get( 'drawer_background', '#ffffff' ),
-			'--ssc-text'          => $settings->get( 'text_color', '#1f2937' ),
-			'--ssc-accent'        => $settings->get( 'accent_color', '#f97316' ),
-			'--ssc-overlay'       => $settings->get( 'overlay_color', 'rgba(15,23,42,0.48)' ),
-			'--ssc-radius'        => $settings->get( 'drawer_radius', '0px' ),
+			'--ssc-bg'            => $settings->get( 'drawer_background', '#090c12' ),
+			'--ssc-text'          => $settings->get( 'text_color', '#f7f7f7' ),
+			'--ssc-accent'        => $settings->get( 'accent_color', '#ff6a00' ),
+			'--ssc-overlay'       => $settings->get( 'overlay_color', 'rgba(0,0,0,.70)' ),
+			'--ssc-radius'        => $settings->get( 'drawer_radius', '12px' ),
 			'--ssc-z'             => (string) $settings->get( 'z_index', 999999 ),
 		);
 
