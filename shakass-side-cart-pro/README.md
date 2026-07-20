@@ -1,8 +1,14 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.6`
+Version: `1.0.0-beta.7`
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
+
+## Inclus dans 1.0.0-beta.7
+
+- Interception des ajouts non Ajax WooCommerce : le client revient sur la page d’origine et le drawer s’ouvre automatiquement au lieu d’être redirigé vers la page panier.
+- Prise en charge des produits WooCommerce natifs et des modules de personnalisation qui utilisent le flux d’ajout WooCommerce.
+- Synchronisation du drawer après les ajouts Ajax sans ouverture intempestive lors du seul rafraîchissement des fragments WooCommerce.
 
 ## Inclus dans 1.0.0-beta.6
 
@@ -33,6 +39,10 @@ Module original de panier latéral Ajax pour WooCommerce, développé pour Shaka
 - Bases pour les codes promo, la progression de récompense et les recommandations cross-sell.
 
 ## Journal des modifications
+
+### 1.0.0-beta.7
+
+- Interception des redirections WooCommerce après ajout au panier afin d’ouvrir le drawer sur la page d’origine, y compris pour les ajouts issus d’un module de personnalisation compatible WooCommerce.
 
 ### 1.0.0-beta.5
 
