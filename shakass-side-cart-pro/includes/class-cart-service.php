@@ -195,7 +195,12 @@ class Cart_Service {
 			return new \WP_Error( 'ssc_invalid_quantity', __( 'Quantité invalide.', 'shakass-side-cart-pro' ), array( 'status' => 400 ) );
 		}
 
-		$item = $cart->get_cart_item( $key );
+		// Work from the cart array, which is the canonical source of the line-item
+		// key for both standard WooCommerce products and personalized products.
+		// Some product extensions replace the product object after it has been added
+		// to the cart, but never alter this array key.
+		$cart_items = $cart->get_cart();
+		$item       = isset( $cart_items[ $key ] ) ? $cart_items[ $key ] : null;
 		if ( ! $item ) {
 			return new \WP_Error( 'ssc_missing_item', __( 'Article introuvable dans le panier.', 'shakass-side-cart-pro' ), array( 'status' => 404 ) );
 		}
@@ -208,7 +213,11 @@ class Cart_Service {
 			}
 		}
 
-		$cart->set_quantity( $key, $quantity, true );
+		$updated = $cart->set_quantity( $key, $quantity, true );
+		if ( false === $updated ) {
+			return new \WP_Error( 'ssc_update_failed', __( 'Impossible de mettre à jour cet article du panier.', 'shakass-side-cart-pro' ), array( 'status' => 400 ) );
+		}
+
 		return $this->get_cart_data();
 	}
 

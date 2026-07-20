@@ -1,8 +1,14 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.5`
+Version: `1.0.0-beta.6`
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
+
+## Inclus dans 1.0.0-beta.6
+
+- Visuels produits de 150 × 150 px dans le panier latéral, avec une mise en page qui réserve l’espace des prix et du bouton de retrait.
+- Bouton de retrait centré et mises à jour de quantité/suppression basées sur la clé réelle de la ligne WooCommerce, y compris pour les articles personnalisés.
+- Progression commerciale de livraison gratuite configurable depuis l’administration.
 
 ## Inclus dans 1.0.0-beta.5
 
