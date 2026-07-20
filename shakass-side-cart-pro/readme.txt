@@ -4,12 +4,16 @@ Tags: woocommerce, panier, ajax, side-cart
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.0-beta.6
+Stable tag: 1.0.0-beta.7
 License: Proprietary
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
 
 == Journal des modifications ==
+
+= 1.0.0-beta.7 =
+* Les ajouts non Ajax (produits WooCommerce natifs ou modules de personnalisation) reviennent désormais sur la page d’origine et ouvrent automatiquement le drawer, au lieu de rediriger vers la page panier.
+* Les ajouts Ajax et les événements `ssc:item-added` ouvrent également le drawer après synchronisation du panier.
 
 = 1.0.0-beta.6 =
 * Agrandissement des visuels produits, amélioration de l’alignement des informations et centrage du bouton de suppression.
