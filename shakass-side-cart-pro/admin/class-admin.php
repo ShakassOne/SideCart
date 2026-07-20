@@ -81,9 +81,9 @@ class Admin {
 					<?php $this->text_row( 'accent_color', __( 'Couleur d’accent', 'shakass-side-cart-pro' ), $values, '#ff6a00' ); ?>
 					<?php $this->text_row( 'overlay_color', __( 'Couleur du voile', 'shakass-side-cart-pro' ), $values, 'rgba(0,0,0,.70)' ); ?>
 					<?php $this->text_row( 'drawer_radius', __( 'Arrondi du tiroir', 'shakass-side-cart-pro' ), $values, '12px' ); ?>
-					<?php $this->number_row( 'free_shipping_threshold', __( 'Seuil de récompense', 'shakass-side-cart-pro' ), $values, 0, 1000000 ); ?>
+					<?php $this->number_row( 'free_shipping_threshold', __( 'Seuil de livraison gratuite', 'shakass-side-cart-pro' ), $values, 0, 1000000 ); ?>
 					<?php $this->checkbox_row( 'coupons_enabled', __( 'Activer le bloc codes promo', 'shakass-side-cart-pro' ), $values ); ?>
-					<?php $this->checkbox_row( 'rewards_enabled', __( 'Activer la progression des récompenses', 'shakass-side-cart-pro' ), $values ); ?>
+					<?php $this->checkbox_row( 'rewards_enabled', __( 'Afficher la progression de livraison gratuite', 'shakass-side-cart-pro' ), $values ); ?>
 					<?php $this->checkbox_row( 'recommendations_enabled', __( 'Activer les recommandations', 'shakass-side-cart-pro' ), $values ); ?>
 					<?php $this->number_row( 'quantity_debounce', __( 'Délai de quantité (ms)', 'shakass-side-cart-pro' ), $values, 0, 3000 ); ?>
 					<?php $this->number_row( 'z_index', __( 'Z-index', 'shakass-side-cart-pro' ), $values, 1, 2147483647 ); ?>
