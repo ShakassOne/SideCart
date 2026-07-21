@@ -21,7 +21,7 @@
 			SSCState.on((cart) => this.render(cart));
 
 			document.addEventListener('click', (event) => {
-				const button = event.target.closest('[data-ssc-qty], [data-ssc-remove]');
+				const button = event.target.closest('[data-ssc-qty], [data-ssc-remove], [data-ssc-mockup-toggle]');
 				if (!button) {
 					return;
 				}
@@ -33,6 +33,11 @@
 
 				if (button.hasAttribute('data-ssc-remove')) {
 					this.remove(item.dataset.key);
+					return;
+				}
+
+				if (button.hasAttribute('data-ssc-mockup-toggle')) {
+					this.toggleMockup(item, button);
 					return;
 				}
 
@@ -54,6 +59,12 @@
 					this.queue(item.dataset.key, event.target.value);
 				}
 			});
+		},
+
+		toggleMockup(item, button) {
+			const isBack = item.classList.toggle('is-showing-back');
+			button.setAttribute('aria-pressed', String(isBack));
+			button.setAttribute('aria-label', isBack ? sscConfig.i18n.showFront : sscConfig.i18n.showBack);
 		},
 
 		queue(key, quantity) {
@@ -140,7 +151,20 @@
 
 			const imageLink = createElement('a', 'ssc-item__image');
 			imageLink.href = item.permalink || '#';
-			imageLink.innerHTML = trustedHtml(item.image);
+			if (item.mockups && item.mockups.recto && item.mockups.verso) {
+				imageLink.classList.add('ssc-item__image--mockups');
+				const front = createElement('img', 'ssc-item__mockup ssc-item__mockup--front');
+				front.src = item.mockups.recto;
+				front.alt = item.name;
+				front.loading = 'lazy';
+				const back = createElement('img', 'ssc-item__mockup ssc-item__mockup--back');
+				back.src = item.mockups.verso;
+				back.alt = '';
+				back.loading = 'lazy';
+				imageLink.append(front, back);
+			} else {
+				imageLink.innerHTML = trustedHtml(item.image);
+			}
 
 			const content = createElement('div', 'ssc-item__content');
 			const name = createElement('a', 'ssc-item__name', item.name);
@@ -180,6 +204,14 @@
 			remove.setAttribute('aria-label', sscConfig.i18n.remove);
 
 			article.append(imageLink, content, lineTotal, remove);
+			if (item.mockups && item.mockups.recto && item.mockups.verso) {
+				const toggle = createElement('button', 'ssc-mockup-toggle');
+				toggle.type = 'button';
+				toggle.dataset.sscMockupToggle = '';
+				toggle.setAttribute('aria-label', sscConfig.i18n.showBack);
+				toggle.setAttribute('aria-pressed', 'false');
+				article.append(toggle);
+			}
 			return article;
 		},
 

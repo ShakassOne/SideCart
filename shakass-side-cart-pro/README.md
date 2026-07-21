@@ -1,6 +1,23 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.9`
+Version: `1.0.0-beta.14`
+
+## Inclus dans 1.0.0-beta.14
+
+- Le bouton Switch n’applique plus de bordure, ombre ou animation CSS ; ses deux images contrôlent entièrement son apparence.
+
+## Inclus dans 1.0.0-beta.13
+
+- Les références aux icônes Switch sont conservées ; les fichiers PNG doivent être déposés séparément dans le dépôt.
+
+## Inclus dans 1.0.0-beta.12
+
+- Le bouton de bascule recto-verso utilise les icônes Switch et SwitchH, avec une animation de visuel plus lente.
+
+## Inclus dans 1.0.0-beta.11
+
+- Affichage recto-verso des mockups T-Shirt Studio 2, avec bascule accessible et respect de la réduction des animations.
+- Appels TSL défensifs et réservés aux lignes portant un identifiant de design, avec repli vers l’image WooCommerce.
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
 
