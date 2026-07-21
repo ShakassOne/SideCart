@@ -1,6 +1,10 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.14`
+Version: `1.0.0-beta.15`
+
+## Inclus dans 1.0.0-beta.15
+
+- Le bouton Switch impose un fond transparent à tous ses états afin de neutraliser le fond rose du thème.
 
 ## Inclus dans 1.0.0-beta.14
 
