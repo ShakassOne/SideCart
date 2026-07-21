@@ -1,6 +1,14 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.11`
+Version: `1.0.0-beta.13`
+
+## Inclus dans 1.0.0-beta.13
+
+- Les références aux icônes Switch sont conservées ; les fichiers PNG doivent être déposés séparément dans le dépôt.
+
+## Inclus dans 1.0.0-beta.12
+
+- Le bouton de bascule recto-verso utilise les icônes Switch et SwitchH, avec une animation de visuel plus lente.
 
 ## Inclus dans 1.0.0-beta.11
 

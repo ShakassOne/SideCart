@@ -4,12 +4,19 @@ Tags: woocommerce, panier, ajax, side-cart
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.0-beta.11
+Stable tag: 1.0.0-beta.13
 License: Proprietary
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
 
 == Journal des modifications ==
+
+= 1.0.0-beta.13 =
+* Les emplacements des icônes Switch sont conservés, sans inclure leurs fichiers PNG dans le plugin.
+
+= 1.0.0-beta.12 =
+* Le bouton de bascule recto-verso utilise les icônes Switch et SwitchH fournies.
+* L’animation de bascule des visuels est ralentie.
 
 = 1.0.0-beta.11 =
 * Ajout de l’affichage recto-verso sécurisé pour les lignes T-Shirt Studio 2.

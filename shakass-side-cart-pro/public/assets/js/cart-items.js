@@ -210,7 +210,6 @@
 				toggle.dataset.sscMockupToggle = '';
 				toggle.setAttribute('aria-label', sscConfig.i18n.showBack);
 				toggle.setAttribute('aria-pressed', 'false');
-				toggle.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 7h9.5l-2.5-2.5M17 17H7.5L10 19.5M18 7a7 7 0 0 1 0 10M6 17a7 7 0 0 1 0-10"/></svg>';
 				article.append(toggle);
 			}
 			return article;
