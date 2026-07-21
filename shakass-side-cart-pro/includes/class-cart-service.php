@@ -73,13 +73,17 @@ class Cart_Service {
 				continue;
 			}
 
+			$design_id  = $this->get_tsl2_design_id( $item );
+			$image_data = $this->get_item_image_data( $product, $item, $key, $design_id );
+
 			$items[] = apply_filters(
 				'ssc_cart_item_data',
 				array(
 					'key'               => $key,
 					'name'              => wp_strip_all_tags( $product->get_name() ),
-					'permalink'         => $this->get_item_permalink( $product, $item ),
-					'image'             => $this->get_item_image_html( $product, $item, $key ),
+					'permalink'         => $this->get_item_permalink( $product, $item, $design_id ),
+					'image'             => $image_data['image'],
+					'mockups'           => $image_data['mockups'],
 					'quantity'          => (int) $item['quantity'],
 					'price'             => wp_kses_post( wc_price( wc_get_price_to_display( $product ) ) ),
 					'line_total'        => wp_kses_post( wc_price( $item['line_total'] + $item['line_tax'] ) ),
@@ -112,11 +116,15 @@ class Cart_Service {
 	 * @param array       $item    WooCommerce cart item.
 	 * @return string
 	 */
-	private function get_item_permalink( $product, $item ) {
-		if ( function_exists( 'tsl2_cart_item_edit_url' ) ) {
-			$edit_url = tsl2_cart_item_edit_url( $item );
-			if ( $edit_url ) {
-				return esc_url_raw( $edit_url );
+	private function get_item_permalink( $product, $item, $design_id ) {
+		if ( $design_id > 0 && function_exists( 'tsl2_cart_item_edit_url' ) ) {
+			try {
+				$edit_url = tsl2_cart_item_edit_url( $item );
+				if ( is_string( $edit_url ) && filter_var( $edit_url, FILTER_VALIDATE_URL ) ) {
+					return esc_url_raw( $edit_url );
+				}
+			} catch ( \Throwable $exception ) {
+				// A personalization integration must never interrupt the cart REST response.
 			}
 		}
 
@@ -124,34 +132,69 @@ class Cart_Service {
 	}
 
 	/**
-	 * Get cart item thumbnail HTML, preferring T-Shirt Studio mockups when present.
+	 * Get the T-Shirt Studio design ID without allowing an integration failure to affect the cart.
 	 *
-	 * The T-Shirt Studio plugin exposes public helpers for custom mockups and also
-	 * injects its image through WooCommerce's standard cart thumbnail filter. This
-	 * method supports both paths while keeping the normal product image fallback.
-	 *
-	 * @param \WC_Product $product Product instance.
-	 * @param array       $item    WooCommerce cart item.
-	 * @param string      $key     Cart item key.
-	 * @return string
+	 * @param array $item WooCommerce cart item.
+	 * @return int
 	 */
-	private function get_item_image_html( $product, $item, $key ) {
-		$image = $product->get_image( 'woocommerce_thumbnail', array( 'loading' => 'lazy' ) );
-
-		if ( function_exists( 'tsl2_cart_item_mockup' ) ) {
-			$mockup = tsl2_cart_item_mockup( $item );
-			if ( $mockup ) {
-				return wp_kses_post(
-					sprintf(
-						'<img src="%1$s" alt="%2$s" loading="lazy" />',
-						esc_url( $mockup ),
-						esc_attr( $product->get_name() )
-					)
-				);
-			}
+	private function get_tsl2_design_id( $item ) {
+		if ( ! function_exists( 'tsl2_cart_item_design_id' ) ) {
+			return 0;
 		}
 
-		return wp_kses_post( apply_filters( 'woocommerce_cart_item_thumbnail', $image, $item, $key ) );
+		try {
+			return max( 0, (int) tsl2_cart_item_design_id( $item ) );
+		} catch ( \Throwable $exception ) {
+			return 0;
+		}
+	}
+
+	/**
+	 * Get cart item thumbnail data, with the normal WooCommerce image as a complete fallback.
+	 *
+	 * Mockup helpers are deliberately called only after a positive TSL design ID is found.
+	 * They only read URLs here: no mockup is generated during a side-cart request.
+	 *
+	 * @param \WC_Product $product   Product instance.
+	 * @param array       $item      WooCommerce cart item.
+	 * @param string      $key       Cart item key.
+	 * @param int         $design_id TSL design ID.
+	 * @return array{image:string,mockups:array<string,string>}
+	 */
+	private function get_item_image_data( $product, $item, $key, $design_id ) {
+		$image = $product->get_image( 'woocommerce_thumbnail', array( 'loading' => 'lazy' ) );
+		$fallback = wp_kses_post( apply_filters( 'woocommerce_cart_item_thumbnail', $image, $item, $key ) );
+		$result   = array( 'image' => $fallback, 'mockups' => array() );
+
+		if ( $design_id <= 0 || ! function_exists( 'tsl2_cart_item_mockups' ) ) {
+			return $result;
+		}
+
+		try {
+			$mockups = tsl2_cart_item_mockups( $item );
+		} catch ( \Throwable $exception ) {
+			return $result;
+		}
+
+		if ( ! is_array( $mockups ) ) {
+			return $result;
+		}
+
+		$recto = isset( $mockups['recto'] ) && is_string( $mockups['recto'] ) ? $mockups['recto'] : '';
+		$verso = isset( $mockups['verso'] ) && is_string( $mockups['verso'] ) ? $mockups['verso'] : '';
+		$recto = filter_var( $recto, FILTER_VALIDATE_URL ) ? esc_url_raw( $recto ) : '';
+		$verso = filter_var( $verso, FILTER_VALIDATE_URL ) ? esc_url_raw( $verso ) : '';
+
+		if ( '' === $recto ) {
+			return $result;
+		}
+
+		$result['image'] = wp_kses_post( sprintf( '<img src="%1$s" alt="%2$s" loading="lazy" />', esc_url( $recto ), esc_attr( $product->get_name() ) ) );
+		if ( '' !== $verso ) {
+			$result['mockups'] = array( 'recto' => $recto, 'verso' => $verso );
+		}
+
+		return $result;
 	}
 
 	/**

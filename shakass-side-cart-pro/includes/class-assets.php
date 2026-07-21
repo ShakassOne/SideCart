@@ -69,6 +69,8 @@ class Assets {
 					'decrease' => __( 'Diminuer la quantité', 'shakass-side-cart-pro' ),
 					'increase' => __( 'Augmenter la quantité', 'shakass-side-cart-pro' ),
 					'remove'   => __( 'Retirer l’article', 'shakass-side-cart-pro' ),
+					'showBack' => __( 'Afficher le verso du produit', 'shakass-side-cart-pro' ),
+					'showFront' => __( 'Afficher le recto du produit', 'shakass-side-cart-pro' ),
 					'couponPlaceholder' => __( 'Code promo', 'shakass-side-cart-pro' ),
 					'applyCoupon' => __( 'Appliquer', 'shakass-side-cart-pro' ),
 					'removeCoupon' => __( 'Retirer le code promo', 'shakass-side-cart-pro' ),
