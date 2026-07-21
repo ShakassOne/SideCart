@@ -7,6 +7,17 @@
 		});
 	}
 
+	function openAfterRedirect() {
+		const url = new URL(window.location.href);
+		if (url.searchParams.get('ssc-open-cart') !== '1') {
+			return false;
+		}
+
+		url.searchParams.delete('ssc-open-cart');
+		window.history.replaceState(window.history.state, document.title, url.toString());
+		return true;
+	}
+
 	function init() {
 		SSCDrawer.init();
 		SSCCartItems.init();
@@ -27,13 +38,14 @@
 			refresh: () => SSCApi.cart().then((cart) => SSCState.set(cart)),
 		};
 
-		window.ShakassSideCart.refresh();
+		refreshAndMaybeOpen(openAfterRedirect() || sscConfig.openAfterTslRestAdd);
 
 		document.body.addEventListener('added_to_cart', () => refreshAndMaybeOpen(true));
 		document.addEventListener('ssc:item-added', () => refreshAndMaybeOpen(true));
 
 		if (window.jQuery) {
-			window.jQuery(document.body).on('added_to_cart wc_fragments_refreshed', () => refreshAndMaybeOpen(true));
+			window.jQuery(document.body).on('added_to_cart', () => refreshAndMaybeOpen(true));
+			window.jQuery(document.body).on('wc_fragments_refreshed', () => refreshAndMaybeOpen(false));
 		}
 
 		document.addEventListener('ssc:error', (event) => {

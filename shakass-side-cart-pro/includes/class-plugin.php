@@ -17,6 +17,7 @@ final class Plugin {
 		if ( is_admin() ) { ( new Admin\Admin() )->init(); }
 		if ( ! Compatibility::is_woocommerce_active() ) { add_action( 'admin_notices', array( $this, 'woocommerce_notice' ) ); return; }
 		( new Rest_API( $this->cart_service ) )->init();
+		( new Add_To_Cart_Interceptor( $this->settings ) )->init();
 		( new Frontend\Frontend( $this->settings, $this->templates ) )->init();
 		$this->shortcodes->init();
 	}
