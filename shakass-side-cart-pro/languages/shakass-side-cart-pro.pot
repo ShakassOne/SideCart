@@ -1,4 +1,4 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Shakass Side Cart Pro 1.0.0-beta.7\n"
+"Project-Id-Version: Shakass Side Cart Pro 1.0.0-beta.8\n"
 "Content-Type: text/plain; charset=UTF-8\n"

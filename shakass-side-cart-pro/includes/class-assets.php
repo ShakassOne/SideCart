@@ -60,6 +60,7 @@ class Assets {
 				'restUrl'      => esc_url_raw( rest_url( 'ssc/v1/' ) ),
 				'nonce'        => wp_create_nonce( 'wp_rest' ),
 				'openAfterAdd' => (bool) $this->settings->get( 'open_after_add', true ),
+				'openAfterTslRestAdd' => Add_To_Cart_Interceptor::consume_tsl_rest_addition(),
 				'debounce'     => (int) $this->settings->get( 'quantity_debounce', 450 ),
 				'i18n'         => array(
 					'error'    => __( 'Impossible de mettre à jour le panier.', 'shakass-side-cart-pro' ),

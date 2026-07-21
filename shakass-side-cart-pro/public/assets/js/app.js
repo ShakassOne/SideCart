@@ -38,7 +38,7 @@
 			refresh: () => SSCApi.cart().then((cart) => SSCState.set(cart)),
 		};
 
-		refreshAndMaybeOpen(openAfterRedirect());
+		refreshAndMaybeOpen(openAfterRedirect() || sscConfig.openAfterTslRestAdd);
 
 		document.body.addEventListener('added_to_cart', () => refreshAndMaybeOpen(true));
 		document.addEventListener('ssc:item-added', () => refreshAndMaybeOpen(true));

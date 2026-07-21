@@ -17,9 +17,42 @@ class Add_To_Cart_Interceptor {
 		$this->settings = $settings;
 	}
 
-	/** Register the WooCommerce redirect filter. */
+	/** Register WooCommerce and TSL add-to-cart hooks. */
 	public function init() {
 		add_filter( 'woocommerce_add_to_cart_redirect', array( $this, 'redirect_to_drawer' ), 20, 2 );
+		add_action( 'woocommerce_add_to_cart', array( $this, 'remember_tsl_rest_addition' ), 20 );
+	}
+
+	/**
+	 * Mark a cart addition made through TSL's REST endpoint for the next page
+	 * load. TSL owns its redirect, so this marker lets the drawer open when its
+	 * redirect lands on the cart page.
+	 */
+	public function remember_tsl_rest_addition() {
+		if ( ! $this->settings->get( 'enabled', true ) || ! $this->settings->get( 'open_after_add', true ) || ! defined( 'REST_REQUEST' ) || ! REST_REQUEST || ! function_exists( 'WC' ) || ! WC()->session ) {
+			return;
+		}
+
+		$request = rest_get_server()->get_current_request();
+		if ( ! $request || 0 !== strpos( $request->get_route(), '/tsl2/v1/cart' ) ) {
+			return;
+		}
+
+		WC()->session->set( 'ssc_open_after_tsl_add', true );
+	}
+
+	/**
+	 * Consume the one-time marker set when TSL adds a customized product.
+	 *
+	 * @return bool
+	 */
+	public static function consume_tsl_rest_addition() {
+		if ( ! function_exists( 'WC' ) || ! WC()->session || ! WC()->session->get( 'ssc_open_after_tsl_add' ) ) {
+			return false;
+		}
+
+		WC()->session->set( 'ssc_open_after_tsl_add', false );
+		return true;
 	}
 
 	/**

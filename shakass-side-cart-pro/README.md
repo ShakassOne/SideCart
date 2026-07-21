@@ -1,8 +1,12 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.7`
+Version: `1.0.0-beta.8`
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
+
+## Inclus dans 1.0.0-beta.8
+
+- Compatibilité avec T-Shirt Studio 2.0 : les ajouts personnalisés transmis par l’endpoint REST `/wp-json/tsl2/v1/cart` mémorisent l’ouverture du drawer pour la page cible de sa redirection.
 
 ## Inclus dans 1.0.0-beta.7
 
@@ -39,6 +43,10 @@ Module original de panier latéral Ajax pour WooCommerce, développé pour Shaka
 - Bases pour les codes promo, la progression de récompense et les recommandations cross-sell.
 
 ## Journal des modifications
+
+### 1.0.0-beta.8
+
+- Le drawer est désormais ouvert automatiquement après l’ajout d’un produit personnalisé via l’endpoint REST de T-Shirt Studio 2.0.
 
 ### 1.0.0-beta.7
 
