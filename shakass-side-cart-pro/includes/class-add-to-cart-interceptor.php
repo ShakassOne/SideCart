@@ -33,8 +33,10 @@ class Add_To_Cart_Interceptor {
 			return;
 		}
 
-		$request = rest_get_server()->get_current_request();
-		if ( ! $request || 0 !== strpos( $request->get_route(), '/tsl2/v1/cart' ) ) {
+		$rest_route  = isset( $_REQUEST['rest_route'] ) ? (string) wp_unslash( $_REQUEST['rest_route'] ) : '';
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
+		$is_tsl_route = 0 === strpos( $rest_route, '/tsl2/v1/cart' ) || false !== strpos( $request_uri, '/wp-json/tsl2/v1/cart' );
+		if ( ! $is_tsl_route ) {
 			return;
 		}
 

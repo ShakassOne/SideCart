@@ -4,12 +4,15 @@ Tags: woocommerce, panier, ajax, side-cart
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.0-beta.8
+Stable tag: 1.0.0-beta.9
 License: Proprietary
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
 
 == Journal des modifications ==
+
+= 1.0.0-beta.9 =
+* Correction de compatibilité avec l’endpoint REST de T-Shirt Studio : la détection de la route n’utilise plus l’objet serveur REST, ce qui évite l’erreur 500 pendant l’ajout au panier.
 
 = 1.0.0-beta.8 =
 * Compatibilité ajoutée avec T-Shirt Studio 2.0 : après un ajout via `/wp-json/tsl2/v1/cart`, le drawer s’ouvre automatiquement sur la page cible de la redirection du studio.

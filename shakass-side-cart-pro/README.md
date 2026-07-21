@@ -1,8 +1,12 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.8`
+Version: `1.0.0-beta.9`
 
 Module original de panier latéral Ajax pour WooCommerce, développé pour Shakass Communication.
+
+## Inclus dans 1.0.0-beta.9
+
+- Correction de l’erreur serveur lors de l’ajout T-Shirt Studio : la route REST est maintenant détectée sans accéder à l’objet serveur REST indisponible dans ce contexte.
 
 ## Inclus dans 1.0.0-beta.8
 
@@ -43,6 +47,10 @@ Module original de panier latéral Ajax pour WooCommerce, développé pour Shaka
 - Bases pour les codes promo, la progression de récompense et les recommandations cross-sell.
 
 ## Journal des modifications
+
+### 1.0.0-beta.9
+
+- Correction de l’erreur 500 déclenchée pendant l’ajout au panier depuis T-Shirt Studio 2.0.
 
 ### 1.0.0-beta.8
 
