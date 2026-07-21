@@ -1,6 +1,10 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.13`
+Version: `1.0.0-beta.14`
+
+## Inclus dans 1.0.0-beta.14
+
+- Le bouton Switch n’applique plus de bordure, ombre ou animation CSS ; ses deux images contrôlent entièrement son apparence.
 
 ## Inclus dans 1.0.0-beta.13
 
