@@ -67,17 +67,18 @@ class Shortcodes {
 	public function menu_cart( $atts = array() ) {
 		$atts = shortcode_atts(
 			array(
-				'label' => __( 'Panier', 'shakass-side-cart-pro' ),
+				'label' => __( 'Article', 'shakass-side-cart-pro' ),
 			),
 			$atts,
 			'ssc_menu_cart'
 		);
 
 		return sprintf(
-			'<button type="button" class="ssc-menu-cart ssc-open-cart"><span class="ssc-menu-cart__label">%1$s</span> <span class="ssc-menu-cart__count" data-ssc-count>%2$s</span> <span class="ssc-menu-cart__total" data-ssc-total>%3$s</span></button>',
+			'<button type="button" class="ssc-menu-cart ssc-open-cart" aria-label="%4$s"><span class="ssc-menu-cart__bag" aria-hidden="true"><svg viewBox="0 0 160 120" focusable="false"><path d="M29 25 12 103l41 14 24-77 73 12"/><path d="M43 39 31 97l22 8"/><path d="M54 76c30-22 66-28 95-8"/><path d="M72 38c1-24 11-35 28-35 19 0 30 16 31 41"/><circle cx="72" cy="42" r="3.5"/><circle cx="131" cy="49" r="3.5"/></svg></span><span class="ssc-menu-cart__content"><span class="ssc-menu-cart__label">%1$s</span><span class="ssc-menu-cart__details"><span class="ssc-menu-cart__count" data-ssc-count>%2$s</span><span class="ssc-menu-cart__total" data-ssc-total>%3$s</span></span></span></button>',
 			esc_html( $atts['label'] ),
 			esc_html( (string) $this->cart->get_count() ),
-			wp_kses_post( $this->cart->get_total_html() )
+			wp_kses_post( $this->cart->get_total_html() ),
+			esc_attr__( 'Ouvrir le panier', 'shakass-side-cart-pro' )
 		);
 	}
 

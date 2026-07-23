@@ -300,14 +300,20 @@
 
 .ssc-floating-cart { position: fixed; right: 22px; bottom: 22px; z-index: 999998; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: rgba(9,12,18,.78); color: var(--ssc-text); box-shadow: 0 18px 44px rgba(0,0,0,.34), 0 0 18px rgba(255,106,0,.10); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 11px 14px; display: flex; gap: 8px; align-items: center; cursor: pointer; transition: transform var(--ssc-transition), box-shadow var(--ssc-transition), border-color var(--ssc-transition); }
 .ssc-floating-cart:hover { transform: translateY(-2px); border-color: rgba(255,106,0,.36); box-shadow: 0 18px 44px rgba(0,0,0,.34), 0 0 22px rgba(255,106,0,.18); }
-.ssc-floating-cart__count,
-.ssc-menu-cart__count { display: inline-flex; min-width: 18px; height: 18px; padding: 0 6px; align-items: center; justify-content: center; border-radius: 999px; background: linear-gradient(180deg, var(--ssc-accent-light), var(--ssc-accent)); color: #120904; font-size: 11px; font-weight: 800; line-height: 1; }
-.ssc-floating-cart__total,
-.ssc-menu-cart__total { white-space: nowrap; color: var(--ssc-text-secondary); }
+.ssc-floating-cart__count { display: inline-flex; min-width: 18px; height: 18px; padding: 0 6px; align-items: center; justify-content: center; border-radius: 999px; background: linear-gradient(180deg, var(--ssc-accent-light), var(--ssc-accent)); color: #120904; font-size: 11px; font-weight: 800; line-height: 1; }
+.ssc-floating-cart__total { white-space: nowrap; color: var(--ssc-text-secondary); }
 .ssc-floating-cart--inline { position: static; }
-.ssc-menu-cart { border: 0; background: transparent; color: inherit; font: inherit; display: inline-flex; gap: .45em; align-items: center; cursor: pointer; padding: 4px 2px; transition: color var(--ssc-transition), filter var(--ssc-transition); }
-.ssc-menu-cart:hover { color: var(--ssc-accent-light); filter: drop-shadow(0 0 8px rgba(255,106,0,.28)); }
-.ssc-menu-cart__label { color: currentColor; }
+.ssc-menu-cart { position: relative; isolation: isolate; width: 144px; height: 94px; border: 0; background: transparent; color: inherit; font: inherit; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; transition: filter var(--ssc-transition), transform var(--ssc-transition); }
+.ssc-menu-cart:hover { transform: translateY(-2px); filter: drop-shadow(0 0 8px rgba(241,90,20,.35)); }
+.ssc-menu-cart__bag { position: absolute; inset: 0; z-index: -1; color: #f15a14; }
+.ssc-menu-cart__bag svg { display: block; width: 100%; height: 100%; overflow: visible; fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.ssc-menu-cart__bag circle { fill: currentColor; stroke: none; }
+.ssc-menu-cart__content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 72px; min-height: 44px; padding: 2px 0 0 3px; text-align: center; line-height: 1.1; }
+.ssc-menu-cart__label { color: currentColor; font-size: 13px; font-weight: 700; }
+.ssc-menu-cart__details { display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; font-size: 12px; }
+.ssc-menu-cart__count { color: currentColor; font-weight: 800; }
+.ssc-menu-cart__count::after { content: "·"; margin-left: 6px; color: #f15a14; }
+.ssc-menu-cart__total { color: currentColor; }
 
 .ssc-empty { text-align: center; padding: 42px 12px; color: var(--ssc-text-secondary); }
 .ssc-empty button { margin-top: 14px; border: 1px solid var(--ssc-border); border-radius: var(--ssc-radius-small); background: var(--ssc-surface); color: var(--ssc-text); padding: 11px 14px; cursor: pointer; }
@@ -338,8 +344,9 @@
 	.ssc-mockup-toggle { left: 63px; bottom: 8px; }
 	.ssc-item__total { top: 47px; right: 10px; }
 	.ssc-coupon-form button { padding-inline: 10px; }
-	.ssc-floating-cart__total,
-	.ssc-menu-cart__total { display: none; }
+	.ssc-floating-cart__total { display: none; }
+	.ssc-menu-cart { width: 126px; height: 82px; }
+	.ssc-menu-cart__content { transform: scale(.92); }
 }
 
 @media (prefers-reduced-motion: reduce) {
