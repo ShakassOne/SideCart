@@ -1,6 +1,10 @@
 # Shakass Side Cart Pro
 
-Version: `1.0.0-beta.15`
+Version: `1.0.0-beta.16`
+
+## Inclus dans 1.0.0-beta.16
+
+- Le shortcode `[ssc_menu_cart]` affiche désormais un sac ouvert inspiré du visuel fourni, avec le libellé « Article », la quantité et le prix centrés dans l’icône.
 
 ## Inclus dans 1.0.0-beta.15
 
